@@ -31,7 +31,9 @@ subprojects {
     version = rootProject.version
 
     repositories {
-        maven("https://papermc.io/repo/repository/maven-public/")
+        maven("https://repo.papermc.io/repository/maven-public/") {
+            name = "papermc"
+        }
         maven(url = "https://oss.sonatype.org/content/repositories/snapshots/") {
             name = "sonatype-oss-snapshots"
         }
@@ -39,7 +41,7 @@ subprojects {
 
     dependencies {
         implementation(kotlin("stdlib"))
-        compileOnly("io.papermc.paper:paper-api:1.21.3-R0.1-SNAPSHOT")
+        compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
         if (this@subprojects.name != "InventoryGUI-api") {
             dependencies {
                 implementation(project(":InventoryGUI-api"))

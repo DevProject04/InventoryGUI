@@ -9,6 +9,7 @@ import net.projecttl.inventory.util.InventoryType
 import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory
 import org.bukkit.plugin.Plugin
+import org.bukkit.plugin.java.JavaPlugin
 import java.util.*
 
 /**
@@ -21,27 +22,15 @@ object InventoryGUI {
     val inventoryIds = hashMapOf<UUID, InventoryBuilder>()
 
     /**
-     * The service plugin. Defaults to the plugin that loaded this library. You can modify this later if you want to
+     * The service plugin. Defaults to the plugin that loaded this library. You can modify this later if you want to.
      *
      * @throws InvalidPluginException if the current library isn't loaded by a plugin
+     * @throws IllegalArgumentException if not loaded by `io.papermc.paper.plugin.provider.classloader.ConfiguredPluginClassLoader.class`
+     * @throws IllegalStateException if the plugin is not found from the classloader
      */
     var plugin: Plugin = Downstream.pullPlugin()
         private set
-    /*
-    var plugin: JavaPlugin = javaClass.classLoader.run {
-        fun checkLoader(classLoader: ClassLoader): ClassLoader {
-            return if (classLoader is PluginClassLoader) {
-                this
-            } else {
-                if (classLoader.parent == null) throw InvalidPluginException("Should be loaded by a plugin")
-                checkLoader(classLoader.parent)
-            }
-        }
-
-        (checkLoader(this) as PluginClassLoader).plugin
     }
-     */
-}
 
 /**
  * Opens the default GUI for a player.
